@@ -25,7 +25,7 @@ public class FibNum implements Cloneable {
     }
 
     public static String[] reciveCurrent(FibNum doCount, int range) {
-        String[] str = new String[50];
+        String[] str = new String[range];
         int last = 1, preLast = 0;
         for(doCount.byCount = 1; doCount.byCount < range + 1; doCount.byCount++)
         {
