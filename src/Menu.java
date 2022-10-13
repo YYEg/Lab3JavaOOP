@@ -33,6 +33,7 @@ public class Menu {
                 case 1: fibNumInMenu();
                     break;
                 case 2:
+                    ArrayLimit();
                     break;
                 case 3:
                     break;
@@ -45,13 +46,13 @@ public class Menu {
         }while(choice != 0);
     }
 
-    private static void fibNumToFile(String[] text, String filename){
+    private static void ToFile(String[] text, String filename){
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(filename))){
             for(int i = 0; i < text.length; i++){
                 dos.writeUTF(text[i]);
                 dos.writeUTF("\n");
-            System.out.println("Сохранение успешно в файле" + filename);
             }
+            System.out.println("Сохранение успешно в файле" + filename);
         }
         catch (FileNotFoundException e) {
             System.out.println("Такого файла нет");
@@ -59,7 +60,7 @@ public class Menu {
             System.out.println("Ошибка записи");
         }
     }
-    private static int fibNumReader(String filepath) {
+    private static int NumReader(String filepath) {
 
         int readed = 0;
         String str = "";
@@ -93,13 +94,13 @@ public class Menu {
 
             switch (choice){
                 case 1: fibNum = new FibNum();
-                    System.out.println("ведите желаемый номер чесла Фибоначчи:");
+                    System.out.println("ведите желаемый номер числа Фибоначчи:");
                     int numberIn = readChoice();
                     String[] text = FibNum.reciveCurrent(fibNum, numberIn);
                     fibNumOutMenu(text, numberIn);
                     break;
                 case 2:
-                    int readedNumberIn = fibNumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
+                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
                     fibNum = new FibNum();
                     String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
                     fibNumOutMenu(str, readedNumberIn);
@@ -126,7 +127,89 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    fibNumToFile(text, "fibNum.txt");
+                    ToFile(text, "fibNum.txt");
+                    System.out.println("Данные записаны в файл");
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+    private static void ArrayLimit(){
+        int choice;
+        do {
+            System.out.println("Ввод ограничения вывода");
+            System.out.println("1 - Ввести с консоли");
+            System.out.println("2 - Ввести из файла");
+            System.out.println("0 - Назад");
+            choice = readChoice();
+
+            switch (choice){
+                case 1: fibNum = new FibNum();
+                    System.out.println("ведите ограничение вывода");
+                    int numberIn = readChoice();
+                    ArrayInMenu(numberIn);
+                    break;
+                case 2:
+                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
+                    fibNum = new FibNum();
+                    String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
+                    fibNumOutMenu(str, readedNumberIn);
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+    private static void ArrayInMenu(int numberIn){
+        int choice;
+        do {
+            System.out.println("Ввод ограничения вывода");
+            System.out.println("1 - заполнить случайными числами");
+            System.out.println("2 - заполнить из файла");
+            System.out.println("0 - Назад");
+            choice = readChoice();
+
+            switch (choice){
+                case 1:
+                    System.out.println("ведите желаемый номер числа Фибоначчи:");
+                    int lenAr = readChoice();
+                    Array limit = new Array(lenAr);
+                    limit.FillRandom();
+                    String[] arr = Array.PrintArray(limit, numberIn);
+                    ArrayOutMenu(arr, numberIn);
+                    break;
+                case 2:
+                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
+                    fibNum = new FibNum();
+                    String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
+                    fibNumOutMenu(str, readedNumberIn);
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+    private static void ArrayOutMenu(String[] text, int limit){
+        int choice;
+        do {
+            System.out.println("Способ вывода");
+            System.out.println("1 - Вывести в консоль");
+            System.out.println("2 - Сохранить в файл");
+            System.out.println("0 - Назад");
+            choice = readChoice();
+
+            switch (choice){
+                case 1:
+                    for (int i = 0; i < limit; i++) {
+                        System.out.println(text[i]);
+                    }
+                    break;
+                case 2:
+                    ToFile(text, "ArrayOut.dat");
                     System.out.println("Данные записаны в файл");
                     break;
                 case 0: break;
