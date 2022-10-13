@@ -36,8 +36,4 @@ public class FibNum implements Cloneable {
         }
         return str;
     }
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }

@@ -1,7 +1,4 @@
-import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Menu {
@@ -48,19 +45,43 @@ public class Menu {
         }while(choice != 0);
     }
 
-    private static void fibNumToFile(String[] text, String testfile){
-        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(testfile))){
+    private static void fibNumToFile(String[] text, String filename){
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(filename))){
             for(int i = 0; i < text.length; i++){
                 dos.writeUTF(text[i]);
                 dos.writeUTF("\n");
+            System.out.println("Сохранение успешно в файле" + filename);
             }
         }
         catch (FileNotFoundException e) {
-            System.out.println("Плохое имя файла");
+            System.out.println("Такого файла нет");
         } catch (IOException e) {
             System.out.println("Ошибка записи");
         }
     }
+    private static int fibNumReader(String filepath) {
+
+        int readed = 0;
+        String str = "";
+        try (FileInputStream dis = new FileInputStream(filepath)) {
+            int i;
+            char cc;
+            readed = 0;
+            while ((i = dis.read()) != -1) {
+
+                cc = ((char) i);
+                str += String.valueOf(cc);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Такого файла нет");
+        } catch (IOException e) {
+            System.out.println("Ошибка записи");
+
+        }
+        readed = Integer.parseInt(String.valueOf(str));
+        return readed;
+    }
+
     private static void fibNumInMenu(){
         int choice = -1;
         do {
@@ -78,6 +99,10 @@ public class Menu {
                     fibNumOutMenu(text, numberIn);
                     break;
                 case 2:
+                    int readedNumberIn = fibNumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
+                    fibNum = new FibNum();
+                    String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
+                    fibNumOutMenu(str, readedNumberIn);
                     break;
                 case 0: break;
                 default:
