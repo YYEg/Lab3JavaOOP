@@ -36,6 +36,7 @@ public class Menu {
                     ArrayLimit();
                     break;
                 case 3:
+                    AvarageArrayInMenu();
                     break;
                 case 4:
                     break;
@@ -45,14 +46,14 @@ public class Menu {
             }
         }while(choice != 0);
     }
-
+    //вывод в файл
     private static void ToFile(String[] text, String filename){
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(filename))){
             for(int i = 0; i < text.length; i++){
                 dos.writeUTF(text[i]);
                 dos.writeUTF("\n");
             }
-            System.out.println("Сохранение успешно в файле" + filename);
+            System.out.println("Сохранение успешно в файле " + filename);
         }
         catch (FileNotFoundException e) {
             System.out.println("Такого файла нет");
@@ -61,7 +62,6 @@ public class Menu {
         }
     }
     private static int NumReader(String filepath) {
-
         int readed = 0;
         String str = "";
         try (FileInputStream dis = new FileInputStream(filepath)) {
@@ -82,7 +82,30 @@ public class Menu {
         readed = Integer.parseInt(String.valueOf(str));
         return readed;
     }
+    //Вывод массива в файл
+    private static String[] ArrReader(String filepath) {
+        int readed = 0;
+        String str = "";
+        try (FileInputStream dis = new FileInputStream(filepath)) {
+            int i;
+            char cc;
+            readed = 0;
+            while ((i = dis.read()) != -1) {
 
+                cc = ((char) i);
+                str += String.valueOf(cc);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Такого файла нет");
+        } catch (IOException e) {
+            System.out.println("Ошибка записи");
+
+        }
+        String arr[] = str.split(" ");
+        return arr;
+    }
+
+    //Ввести необходимый номер нужного числа Фибоначчи
     private static void fibNumInMenu(){
         int choice = -1;
         do {
@@ -111,6 +134,7 @@ public class Menu {
             }
         }while(choice != 0);
     }
+    //вывести число Фибоначчи
     private static void fibNumOutMenu(String[] text, int numberIn){
         int choice = -1;
         do {
@@ -136,6 +160,7 @@ public class Menu {
             }
         }while(choice != 0);
     }
+    //Ввести ограничение вывода массива
     private static void ArrayLimit(){
         int choice;
         do {
@@ -152,10 +177,8 @@ public class Menu {
                     ArrayInMenu(numberIn);
                     break;
                 case 2:
-                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
-                    fibNum = new FibNum();
-                    String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
-                    fibNumOutMenu(str, readedNumberIn);
+                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\limit.dat");
+                    ArrayInMenu(readedNumberIn);
                     break;
                 case 0: break;
                 default:
@@ -163,6 +186,7 @@ public class Menu {
             }
         }while(choice != 0);
     }
+    //Заполнить массив
     private static void ArrayInMenu(int numberIn){
         int choice;
         do {
@@ -174,7 +198,7 @@ public class Menu {
 
             switch (choice){
                 case 1:
-                    System.out.println("ведите желаемый номер числа Фибоначчи:");
+                    System.out.println("Введите размерность массива:");
                     int lenAr = readChoice();
                     Array limit = new Array(lenAr);
                     limit.FillRandom();
@@ -182,10 +206,16 @@ public class Menu {
                     ArrayOutMenu(arr, numberIn);
                     break;
                 case 2:
-                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
-                    fibNum = new FibNum();
-                    String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
-                    fibNumOutMenu(str, readedNumberIn);
+                    String[] readedArrayIn = ArrReader("ArrayIn.dat");
+                    int [] newArr = new int[readedArrayIn.length];
+                    for(int i = 0; i < readedArrayIn.length; i++){
+                        newArr[i] = Integer.parseInt(readedArrayIn[i]);
+                    }
+                    Array outArray = new Array(readedArrayIn.length);
+                    outArray.setNumbersArr(newArr);
+                    readedArrayIn = Array.PrintArray(outArray, numberIn);
+                    ArrayOutMenu(readedArrayIn, numberIn);
+
                     break;
                 case 0: break;
                 default:
@@ -193,6 +223,7 @@ public class Menu {
             }
         }while(choice != 0);
     }
+    //Вывести массив
     private static void ArrayOutMenu(String[] text, int limit){
         int choice;
         do {
@@ -210,6 +241,68 @@ public class Menu {
                     break;
                 case 2:
                     ToFile(text, "ArrayOut.dat");
+                    System.out.println("Данные записаны в файл");
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+    //Заполнить массив для среднего значения
+    private static void AvarageArrayInMenu(){
+        int choice;
+        do {
+            System.out.println("Ввод ограничения вывода");
+            System.out.println("1 - заполнить случайными числами");
+            System.out.println("2 - заполнить из файла");
+            System.out.println("0 - Назад");
+            choice = readChoice();
+
+            switch (choice){
+                case 1:
+                    System.out.println("Введите размерность массива:");
+                    int lenAr = readChoice();
+                    Array limit = new Array(lenAr);
+                    limit.FillRandom();
+                    int avarage = Array.reciveAvarage(limit);
+                    String[] avarageArr = {String.format("%d", avarage)};
+                    AvarageOutMenu(avarageArr);
+                    break;
+                case 2:
+                    String[] readedArrayIn = ArrReader("avarageIn.dat");
+                    int [] newArr = new int[readedArrayIn.length];
+                    for(int i = 0; i < readedArrayIn.length; i++){
+                        newArr[i] = Integer.parseInt(readedArrayIn[i]);
+                    }
+                    Array outArray = new Array(readedArrayIn.length);
+                    outArray.setNumbersArr(newArr);
+                    int avarageNum = Array.reciveAvarage(outArray);
+                    String[] avarageValueArr = {String.format("%d", avarageNum)};
+                    AvarageOutMenu(avarageValueArr);
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+    //Вывести среднее значение
+    private static void AvarageOutMenu(String[] text){
+        int choice;
+        do {
+            System.out.println("Способ вывода среднего значения");
+            System.out.println("1 - Вывести в консоль");
+            System.out.println("2 - Сохранить в файл");
+            System.out.println("0 - Назад");
+            choice = readChoice();
+
+            switch (choice){
+                case 1:
+                    System.out.println(text[0]);
+                    break;
+                case 2:
+                    ToFile(text, "avarageOut.dat");
                     System.out.println("Данные записаны в файл");
                     break;
                 case 0: break;
