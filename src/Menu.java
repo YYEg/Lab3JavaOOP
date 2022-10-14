@@ -8,7 +8,7 @@ public class Menu {
     }
     public static int readChoice(){        //Функция для чтения, обрабатывающая ошибки ввода
         Scanner in = new Scanner(System.in);
-        int readed = -1;
+        int readed;
         try {
              readed = Integer.parseInt(in.nextLine());
         }
@@ -19,7 +19,7 @@ public class Menu {
         return readed;
     }
     private static void mainMenu(){        //Главное меню
-        int choice = -1;
+        int choice;
         do {
             System.out.println("Главное меню");
             System.out.println("1 - Числа Фибоначчи");
@@ -39,6 +39,7 @@ public class Menu {
                     AvarageArrayInMenu();
                     break;
                 case 4:
+                    convertInMenu();
                     break;
                 case 0: break;
                 default:
@@ -62,12 +63,11 @@ public class Menu {
         }
     }
     private static int NumReader(String filepath) {
-        int readed = 0;
+        int readed;
         String str = "";
         try (FileInputStream dis = new FileInputStream(filepath)) {
             int i;
             char cc;
-            readed = 0;
             while ((i = dis.read()) != -1) {
 
                 cc = ((char) i);
@@ -79,17 +79,15 @@ public class Menu {
             System.out.println("Ошибка записи");
 
         }
-        readed = Integer.parseInt(String.valueOf(str));
+        readed = Integer.parseInt(str);
         return readed;
     }
     //Вывод массива в файл
     private static String[] ArrReader(String filepath) {
-        int readed = 0;
         String str = "";
         try (FileInputStream dis = new FileInputStream(filepath)) {
             int i;
             char cc;
-            readed = 0;
             while ((i = dis.read()) != -1) {
 
                 cc = ((char) i);
@@ -101,13 +99,12 @@ public class Menu {
             System.out.println("Ошибка записи");
 
         }
-        String arr[] = str.split(" ");
-        return arr;
+        return str.split(" ");
     }
 
     //Ввести необходимый номер нужного числа Фибоначчи
     private static void fibNumInMenu(){
-        int choice = -1;
+        int choice;
         do {
             System.out.println("Ввод ограничения вывода");
             System.out.println("1 - Ввести с консоли");
@@ -136,7 +133,7 @@ public class Menu {
     }
     //вывести число Фибоначчи
     private static void fibNumOutMenu(String[] text, int numberIn){
-        int choice = -1;
+        int choice;
         do {
             System.out.println("Способ вывода");
             System.out.println("1 - Вывести в консоль");
@@ -253,7 +250,7 @@ public class Menu {
     private static void AvarageArrayInMenu(){
         int choice;
         do {
-            System.out.println("Ввод ограничения вывода");
+            System.out.println("Заполнить массив");
             System.out.println("1 - заполнить случайными числами");
             System.out.println("2 - заполнить из файла");
             System.out.println("0 - Назад");
@@ -311,5 +308,58 @@ public class Menu {
             }
         }while(choice != 0);
     }
-}
+    //Ввести число, которое необходимо конвертировать
+    private static void convertInMenu(){
+        int choice;
+        do {
+            System.out.println("Ввести число для конвертации");
+            System.out.println("1 - Ввести с консоли");
+            System.out.println("2 - Ввести из файла");
+            System.out.println("0 - Назад");
+            choice = readChoice();
 
+            switch (choice){
+                case 1:
+                    System.out.println("Какое число вы желаете конвертировать?");
+                    int numberIn = readChoice();
+                    String converted = Words.convert(numberIn);
+                    String[] convertedArr = {String.format("%s", converted)};
+                    convertOutMenu(convertedArr);
+                    break;
+                case 2:
+                    int wordNumber = NumReader("wordsIn.dat");
+                    String word = Words.convert(wordNumber);
+                    String[] convertedFileArr = {String.format("%s", word)};
+                    convertOutMenu(convertedFileArr);
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+    //Вывести среднее значение
+    private static void convertOutMenu(String[] text){
+        int choice;
+        do {
+            System.out.println("Способ вывода среднего значения");
+            System.out.println("1 - Вывести в консоль");
+            System.out.println("2 - Сохранить в файл");
+            System.out.println("0 - Назад");
+            choice = readChoice();
+
+            switch (choice){
+                case 1:
+                    System.out.println(text[0]);
+                    break;
+                case 2:
+                    ToFile(text, "wordsOut.dat");
+                    System.out.println("Данные записаны в файл");
+                    break;
+                case 0: break;
+                default:
+                    System.out.println("Нет такого пункта");
+            }
+        }while(choice != 0);
+    }
+}
