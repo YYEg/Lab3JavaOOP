@@ -55,8 +55,8 @@ public class Menu {
     //вывод в файл
     private static void ToFile(String[] text, String filename){
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(filename))){
-            for(int i = 0; i < text.length; i++){
-                dos.writeUTF(text[i]);
+            for (String s : text) {
+                dos.writeUTF(s);
                 dos.writeUTF("\n");
             }
             System.out.println("Сохранение успешно в файле " + filename);
@@ -70,14 +70,14 @@ public class Menu {
     //Чтение из файла
     private static int NumReader(String filepath) {
         int readed;
-        String str = "";
+        StringBuilder str = new StringBuilder();
         try (FileInputStream dis = new FileInputStream(filepath)) {
             int i;
             char cc;
             while ((i = dis.read()) != -1) {
 
                 cc = ((char) i);
-                str += String.valueOf(cc);
+                str.append(cc);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Такого файла нет");
@@ -85,19 +85,19 @@ public class Menu {
             System.out.println("Ошибка записи");
 
         }
-        readed = Integer.parseInt(str);
+        readed = Integer.parseInt(str.toString());
         return readed;
     }
     //Чтение массива из файл
     private static String[] ArrReader(String filepath) {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         try (FileInputStream dis = new FileInputStream(filepath)) {
             int i;
             char cc;
             while ((i = dis.read()) != -1) {
 
                 cc = ((char) i);
-                str += String.valueOf(cc);
+                str.append(cc);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Такого файла нет");
@@ -105,7 +105,7 @@ public class Menu {
             System.out.println("Ошибка записи");
 
         }
-        return str.split(" ");
+        return str.toString().split(" ");
     }
     //Ввести необходимый номер нужного числа Фибоначчи
     private static void fibNumInMenu(){
@@ -125,7 +125,7 @@ public class Menu {
                     fibNumOutMenu(text, numberIn);
                     break;
                 case 2:
-                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\lin.dat");
+                    int readedNumberIn = NumReader("fibIn.dat");
                     fibNum = new FibNum();
                     String[] str = FibNum.reciveCurrent(fibNum, readedNumberIn);
                     fibNumOutMenu(str, readedNumberIn);
@@ -179,7 +179,7 @@ public class Menu {
                     ArrayInMenu(numberIn);
                     break;
                 case 2:
-                    int readedNumberIn = NumReader("C:\\Users\\supir\\IdeaProjects\\Lab3JavaOOP\\limit.dat");
+                    int readedNumberIn = NumReader("arrLimit.dat");
                     ArrayInMenu(readedNumberIn);
                     break;
                 case 0: break;

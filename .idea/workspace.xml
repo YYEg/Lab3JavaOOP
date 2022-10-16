@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f6db57c1-c450-4f8c-8961-42f4e4dbeb57" name="Changes" comment="final commit">
+      <change afterPath="$PROJECT_DIR$/fibIn.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArrayIn.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ArrayIn.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArrayOut.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ArrayOut.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avarageIn.dat" beforeDir="false" afterPath="$PROJECT_DIR$/avarageIn.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avarageOut.dat" beforeDir="false" afterPath="$PROJECT_DIR$/avarageOut.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fibNum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fibNum.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lin.dat" beforeDir="false" afterPath="$PROJECT_DIR$/lin.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limit.dat" beforeDir="false" afterPath="$PROJECT_DIR$/arrLimit.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lin.dat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wordsIn.dat" beforeDir="false" afterPath="$PROJECT_DIR$/wordsIn.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordsOut.dat" beforeDir="false" afterPath="$PROJECT_DIR$/wordsOut.dat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +52,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/supir/IdeaProjects/Lab3JavaOOP",
+    "last_opened_file_path": "D:/IntellijIdea/jdk",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
