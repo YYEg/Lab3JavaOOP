@@ -3,10 +3,14 @@ import java.util.Scanner;
 
 public class Menu {
     public static FibNum fibNum; //ссылка на обьекта класса FibNum
+    public static Array limit; //ссылка на обьект класса Array
+    //Вызов меню
     public static void start(){
         mainMenu();
     }
-    public static int readChoice(){        //Функция для чтения, обрабатывающая ошибки ввода
+    //Использование сканнера с исключениями
+    //Функция для чтения, обрабатывающая ошибки ввода
+    public static int readChoice(){
         Scanner in = new Scanner(System.in);
         int readed;
         try {
@@ -18,6 +22,7 @@ public class Menu {
         }
         return readed;
     }
+    //Главное меню
     private static void mainMenu(){        //Главное меню
         int choice;
         do {
@@ -62,6 +67,7 @@ public class Menu {
             System.out.println("Ошибка записи");
         }
     }
+    //Чтение из файла
     private static int NumReader(String filepath) {
         int readed;
         String str = "";
@@ -82,7 +88,7 @@ public class Menu {
         readed = Integer.parseInt(str);
         return readed;
     }
-    //Вывод массива в файл
+    //Чтение массива из файл
     private static String[] ArrReader(String filepath) {
         String str = "";
         try (FileInputStream dis = new FileInputStream(filepath)) {
@@ -101,7 +107,6 @@ public class Menu {
         }
         return str.split(" ");
     }
-
     //Ввести необходимый номер нужного числа Фибоначчи
     private static void fibNumInMenu(){
         int choice;
@@ -168,7 +173,7 @@ public class Menu {
             choice = readChoice();
 
             switch (choice){
-                case 1: fibNum = new FibNum();
+                case 1:
                     System.out.println("ведите ограничение вывода");
                     int numberIn = readChoice();
                     ArrayInMenu(numberIn);
@@ -197,7 +202,7 @@ public class Menu {
                 case 1:
                     System.out.println("Введите размерность массива:");
                     int lenAr = readChoice();
-                    Array limit = new Array(lenAr);
+                    limit = new Array(lenAr);
                     limit.FillRandom();
                     String[] arr = Array.PrintArray(limit, numberIn);
                     ArrayOutMenu(arr, numberIn);
@@ -260,7 +265,7 @@ public class Menu {
                 case 1:
                     System.out.println("Введите размерность массива:");
                     int lenAr = readChoice();
-                    Array limit = new Array(lenAr);
+                    limit = new Array(lenAr);
                     limit.FillRandom();
                     int avarage = Array.reciveAvarage(limit);
                     String[] avarageArr = {String.format("%d", avarage)};
