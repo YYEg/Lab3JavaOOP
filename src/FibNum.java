@@ -1,4 +1,4 @@
-public class FibNum implements Cloneable {
+public class FibNum {
     private int current;
     private int byCount;
 
@@ -6,18 +6,6 @@ public class FibNum implements Cloneable {
     {
         this.current = 1;
         this.byCount = 1;
-    }
-
-    public int getCurrent() {
-        return current;
-    }
-
-    public int getByCount() {
-        return byCount;
-    }
-
-    public void setCurrent(int current) {
-        this.current = current;
     }
 
     private String verbose(){

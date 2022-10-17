@@ -67,7 +67,7 @@ public class Menu {
             System.out.println("Ошибка записи");
         }
     }
-    //Чтение из файла
+    //Чтение из файла числа
     private static int NumReader(String filepath) {
         int readed;
         StringBuilder str = new StringBuilder();
@@ -75,7 +75,6 @@ public class Menu {
             int i;
             char cc;
             while ((i = dis.read()) != -1) {
-
                 cc = ((char) i);
                 str.append(cc);
             }
@@ -83,7 +82,6 @@ public class Menu {
             System.out.println("Такого файла нет");
         } catch (IOException e) {
             System.out.println("Ошибка записи");
-
         }
         readed = Integer.parseInt(str.toString());
         return readed;

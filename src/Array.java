@@ -2,12 +2,11 @@ import java.util.Random;
 
 public class Array {
     private int[] numbersArr;
-    private int rangeOfArray;
+    private final int rangeOfArray;
 
     public Array(int rangeOfArray) {
         this.rangeOfArray = rangeOfArray;
-        int[] arr = new int[rangeOfArray];
-        this.numbersArr = arr;
+        this.numbersArr = new int[rangeOfArray];
     }
 
     public void setNumbersArr(int[] numbersArr) {
